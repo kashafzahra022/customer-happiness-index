@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#142a43" />
+  <title>Admin sign in · Customer Pulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" /><link rel="stylesheet" href="{{ url_for('static', filename='static/app.css') }}" /><link rel="stylesheet" href="{{ url_for('static', filename='static/theme-green.css') }}" />
+</head>
+<body class="login-page">
+  <main class="login-layout">
+    <section class="login-story"><a class="brand" href="{{ url_for('login') }}"><span class="brand-symbol"><i></i><i></i><i></i></span><span><strong>northstar</strong><small>customer intelligence</small></span></a><div class="story-copy"><span class="eyebrow">CUSTOMER EXPERIENCE INTELLIGENCE</span><h1>Listen closer.<br />Build trust that lasts.</h1><p>One clear view of customer sentiment, service friction, and the moments that make people stay.</p><div class="story-stat"><span class="story-stat-icon">↗</span><span><strong>Every voice, understood.</strong><small>Sentiment · themes · happiness index</small></span></div></div><div class="story-bottom"><span>01 / 05</span><span>HAPPINESS INTELLIGENCE POC</span></div></section>
+    <section class="login-panel"><div class="login-box"><span class="eyebrow blue-eyebrow">SECURE WORKSPACE</span><h2>Welcome back</h2><p class="login-subtitle">Sign in to continue to your customer analytics.</p>
+      {% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="flash {{ category }} login-flash"><span>!</span>{{ message }}</div>{% endfor %}{% endwith %}
+      <form method="post" class="login-form"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /><label for="username">Username</label><input id="username" name="username" type="text" autocomplete="username" placeholder="Enter username" required autofocus /><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required /><button class="button button-primary login-button" type="submit">Sign in <span>→</span></button></form>
+      <p class="register-prompt">New to the workspace? <a href="{{ url_for('register') }}">Create an account</a></p>
+      {% if show_demo_credentials %}<div class="demo-credential"><span>DEMO ACCESS</span><div><code>admin</code><b>/</b><code>admin123</code></div></div>{% endif %}
+      <p class="login-disclaimer">Demo credentials are for a local proof of concept. Set <code>ADMIN_USERNAME</code>, <code>ADMIN_PASSWORD</code>, and <code>SECRET_KEY</code> before deployment.</p>
+    </div><footer class="login-footer">Customer Pulse · Do not enter real customer data in a public demo.</footer></section>
+  </main>
+</body>
+</html>
